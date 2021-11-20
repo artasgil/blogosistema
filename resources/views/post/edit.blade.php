@@ -21,7 +21,7 @@
     <div class="form-row">
       <div class="form-group col-md-4 categoryNew">
         <label for="inputState">Choose category</label>
-        <select id="postCategory" name="postCategory" class="form-control">
+        <select id="postCategory" name="category_id" class="form-control">
             @foreach ($categories as $category)
             <option value="{{ $category->id }}" @if($post->category_id == $category->id) selected @endif>{{ $category->title }}</option>
             @endforeach
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-<button type="submit" class="btn btn-primary">Create</button>
+<button type="submit" class="btn btn-primary">Edit</button>
 
 </form>
 </div>

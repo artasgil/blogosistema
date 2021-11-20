@@ -24,17 +24,20 @@
 
             @foreach ($categories as $category)
                 <tr>
+                <form method="post" action={{ route('category.destroy', [$category]) }}>
+                {{-- <td><input type="checkbox" name="checked[]" class="checkboxes" value="{{ $category->id }}" /></td> --}}
                     <td>{{ $category->id }} </td>
                     <td>{{ $category->title }} </td>
                     <td>{{ $category->excertpt}} </td>
                     <td>{{ $category->email }} </td>
+                    <td>{{$category->categoryPosts->count()}}</td>
                     <td>
                         <div class="btn-group-vertical">
                             <a href="{{ route('category.show', [$category]) }}" class="btn btn-secondary">Show </a>
                             <a href="{{ route('category.edit', [$category]) }}" class="btn btn-primary">Edit </a>
                         </div>
                         <td>
-                        <form method="post" action={{ route('category.destroy', [$category]) }}>
+                        
                             @csrf
                             <button type="submit" class="btn btn-danger">DELETE</button>
                         </form>

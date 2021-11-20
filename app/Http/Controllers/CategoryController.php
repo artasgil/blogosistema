@@ -87,7 +87,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', ['category' => $category]);
     }
 
     /**
@@ -99,7 +99,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->title = $request->category_title;
+        $category->excertpt = $request->category_excertpt;
+        $category->email = $request->category_email;
+
+        $category->save();
+        return redirect()->route("category.index");
     }
 
     /**
@@ -108,8 +113,22 @@ class CategoryController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, Request $request)
     {
-        //
+        $posts_count = $category->categoryPosts->count();
+        if($posts_count!==0) {
+            return redirect()->route("category.index")->with('error_message','Category can not be deleted, because has posts');
+        }
+        $category->delete();
+        return redirect()->route("category.index")->with('sucess_message','Category deleted successfully');
     }
+
+
+    // $id = $request->id;
+    // foreach ($id as $category) 
+    // {
+    //     Category::where('id', $category)->delete();
+    // }
+    // return redirect();
+
 }
