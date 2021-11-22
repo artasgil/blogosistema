@@ -3,6 +3,17 @@
 
 @section('content')
     <div class="container">
+        @if(session()->has('error_message'))
+        <div class="alert alert-danger">
+        {{session()->get("error_message")}}
+        </div>
+        @endif
+
+        @if(session()->has('sucess_message'))
+        <div class="alert alert-success">
+        {{session()->get("sucess_message")}}
+        </div>
+        @endif
 
         <div class="form-row">
             <div class="form-group">
@@ -18,6 +29,7 @@
                 <th>@sortablelink('title', 'Title')</th>
                 <th>@sortablelink('excertpt', 'Excertpt')</th>
                 <th>@sortablelink('email', 'Email')</th>
+                <th>Post records</th>
                 <th> Action </th>
                 <th> Delete </th>
             </tr>
@@ -37,12 +49,12 @@
                             <a href="{{ route('category.edit', [$category]) }}" class="btn btn-primary">Edit </a>
                         </div>
                         <td>
-                        
+
                             @csrf
                             <button type="submit" class="btn btn-danger">DELETE</button>
                         </form>
-                        <td>
                     </td>
+                </tr>
             @endforeach
         </table>
 
